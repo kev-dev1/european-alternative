@@ -1,0 +1,25 @@
+GITHUB PAGES SETUP
+==================
+
+1. Gehe zu github.com und erstelle ein neues Repository
+   Name: privacy-alternatives
+
+2. Lade alle 3 Dateien hoch:
+   - alternatives.html  (Hauptseite)
+   - README.md          (Repo-Beschreibung)
+   - .nojekyll          (Diese Datei – verhindert Jekyll-Verarbeitung)
+
+3. Gehe zu: Repo → Settings → Pages
+   - Source: "Deploy from a branch"
+   - Branch: main
+   - Folder: / (root)
+   - Klick "Save"
+
+4. Nach ~2 Minuten ist die Seite live unter:
+   https://DEINNAME.github.io/privacy-alternatives
+
+5. Ersetze überall "DEINNAME" mit deinem echten GitHub-Username:
+   - In README.md (3x)
+   - In alternatives.html (2x in den Meta-Tags)
+
+FERTIG! 🎉

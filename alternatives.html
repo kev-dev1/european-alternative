@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google & Microsoft Alternativen – Privacy-First & Europäisch</title>
+
+<!-- SEO -->
+<meta name="description" content="Interaktive Übersicht datenschutzfreundlicher Alternativen zu Google und Microsoft – mit Fokus auf europäische und Open-Source-Dienste.">
+<meta name="keywords" content="Google Alternative, Microsoft Alternative, Datenschutz, Open Source, Europa, Privacy, Self-Hosted, DSGVO">
+<meta name="author" content="DEINNAME">
+
+<!-- Open Graph (für Link-Vorschau z.B. auf GitHub, Discord, etc.) -->
+<meta property="og:title" content="🛡️ Google & Microsoft Alternativen">
+<meta property="og:description" content="Datenschutzfreundliche Alternativen für jeden Dienst – filterbar, europäisch, open source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://DEINNAME.github.io/privacy-alternatives">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://DEINNAME.github.io/privacy-alternatives">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #18181c;
+    --surface2: #22222a;
+    --border: #2e2e3a;
+    --accent: #5b6af5;
+    --accent2: #e05a7a;
+    --accent3: #3dd68c;
+    --accent4: #f5a623;
+    --text: #f0f0f5;
+    --muted: #7a7a9a;
+    --tag-bg: #22223a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(91,106,245,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,106,245,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  h1 span.g { color: #ea4335; }
+  h1 span.m { color: #00a4ef; }
+  h1 span.arrow { color: var(--accent3); margin: 0 12px; }
+
+  .subtitle {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  /* Filter tabs */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.5s ease both;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: #3a3a50;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card[data-cat="office"]::before { background: linear-gradient(90deg, #5b6af5, #a78bfa); }
+  .card[data-cat="mail"]::before { background: linear-gradient(90deg, #e05a7a, #f97316); }
+  .card[data-cat="cloud"]::before { background: linear-gradient(90deg, #3dd68c, #06b6d4); }
+  .card[data-cat="browser"]::before { background: linear-gradient(90deg, #f5a623, #f59e0b); }
+  .card[data-cat="search"]::before { background: linear-gradient(90deg, #06b6d4, #6366f1); }
+  .card[data-cat="maps"]::before { background: linear-gradient(90deg, #3dd68c, #84cc16); }
+  .card[data-cat="video"]::before { background: linear-gradient(90deg, #e05a7a, #dc2626); }
+  .card[data-cat="chat"]::before { background: linear-gradient(90deg, #a78bfa, #5b6af5); }
+  .card[data-cat="password"]::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+  .card[data-cat="os"]::before { background: linear-gradient(90deg, #10b981, #0891b2); }
+  .card[data-cat="notes"]::before { background: linear-gradient(90deg, #f5a623, #e05a7a); }
+  .card[data-cat="vpn"]::before { background: linear-gradient(90deg, #1d6fa4, #3dd68c); }
+
+  .eu-filter-btn {
+    border-color: #3b82f6 !important;
+    color: #60a5fa !important;
+  }
+  .eu-filter-btn.active {
+    background: linear-gradient(90deg, #1e3a8a, #1d4ed8) !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+
+  .category-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .category-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--tag-bg);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .replaces {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .replaces-label {
+    opacity: 0.6;
+  }
+
+  .replace-tag {
+    background: rgba(224,90,122,0.15);
+    color: #e05a7a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .tag.free { background: rgba(61,214,140,0.12); color: #3dd68c; }
+  .tag.open { background: rgba(91,106,245,0.15); color: #818cf8; }
+  .tag.self { background: rgba(245,166,35,0.13); color: #f5a623; }
+  .tag.hosted { background: rgba(6,182,212,0.13); color: #22d3ee; }
+  .tag.privacy { background: rgba(167,139,250,0.13); color: #a78bfa; }
+  .tag.eu { background: rgba(224,90,122,0.12); color: #e05a7a; }
+
+  .hidden { display: none !important; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+  }
+
+  .count {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    animation: fadeUp 0.5s 0.2s ease both;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="eyebrow">// Open Source & Privacy-First</div>
+    <h1><span class="g">Google</span> & <span class="m">Microsoft</span><span class="arrow">→</span>Alternativen</h1>
+    <p class="subtitle">Unabhängig, sicher, meist kostenlos – die besten Alternativen für jeden Dienst.</p>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#3dd68c"></div> Kostenlos</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#818cf8"></div> Open Source</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div> Self-Hosted möglich</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div> Cloud-Hosted</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div> Privacy-First</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e05a7a"></div> EU-basiert</div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filter('all')">Alle</button>
+    <button class="filter-btn eu-filter-btn" onclick="filterEU()">🇪🇺 Nur Europäisch</button>
+    <button class="filter-btn" onclick="filter('office')">📄 Office</button>
+    <button class="filter-btn" onclick="filter('mail')">📧 E-Mail</button>
+    <button class="filter-btn" onclick="filter('cloud')">☁️ Cloud</button>
+    <button class="filter-btn" onclick="filter('browser')">🌐 Browser</button>
+    <button class="filter-btn" onclick="filter('search')">🔍 Suche</button>
+    <button class="filter-btn" onclick="filter('maps')">🗺️ Maps</button>
+    <button class="filter-btn" onclick="filter('video')">🎥 Video</button>
+    <button class="filter-btn" onclick="filter('chat')">💬 Chat</button>
+    <button class="filter-btn" onclick="filter('password')">🔐 Passwörter</button>
+    <button class="filter-btn" onclick="filter('os')">💻 OS</button>
+    <button class="filter-btn" onclick="filter('notes')">📝 Notizen</button>
+    <button class="filter-btn" onclick="filter('photo')">📷 Fotos</button>
+    <button class="filter-btn" onclick="filter('vpn')">🛡️ VPN</button>
+  </div>
+
+  <div class="count" id="count"></div>
+
+  <div class="grid" id="grid">
+
+    <!-- OFFICE -->
+    <div class="card" data-cat="office">
+      <div class="card-header">
+        <span class="category-icon">📄</span>
+        <span class="category-badge">Office</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Microsoft Office</span><span class="replace-tag">Google Docs</span></div>
+      <h3>LibreOffice</h3>
+      <p class="desc">Vollständige Office-Suite mit Writer, Calc, Impress & mehr. Liest und schreibt .docx/.xlsx/.pptx nativ. Desktop-App für Windows, Mac, Linux.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+    </div>
+
+    <div class="card" data-cat="office">
+      <div class="card-header">
+        <span class="category-icon">📄</span>
+        <span class="category-badge">Office Online</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Docs</span><span class="replace-tag">Office 365</span></div>
+      <h3>OnlyOffice</h3>
+      <p class="desc">Browser-basierte Office-Suite mit sehr guter MS-Office-Kompatibilität. Als Docker-Container self-hostbar oder Cloud-Version verfügbar.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="office">
+      <div class="card-header">
+        <span class="category-icon">📄</span>
+        <span class="category-badge">Office Online</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Docs</span><span class="replace-tag">Office 365</span></div>
+      <h3>Collabora Online</h3>
+      <p class="desc">LibreOffice im Browser, ideal für Teams. Integrierbar in Seafile, Nextcloud etc. Sehr gute Formatkompatibilität.</p>
+      <div class="tags"><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag hosted">Cloud</span></div>
+    </div>
+
+    <!-- MAIL -->
+    <div class="card" data-cat="mail">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">E-Mail Client</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Gmail</span><span class="replace-tag">Outlook</span></div>
+      <h3>Thunderbird</h3>
+      <p class="desc">Klassischer, mächtiger Desktop-Mail-Client von Mozilla. Unterstützt IMAP, POP3, CalDAV, CardDAV und hat eine riesige Add-on-Bibliothek.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+    </div>
+
+    <div class="card" data-cat="mail">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">E-Mail Provider</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Gmail</span><span class="replace-tag">Outlook</span></div>
+      <h3>ProtonMail</h3>
+      <p class="desc">Ende-zu-Ende verschlüsselter E-Mail-Dienst aus der Schweiz. Gratis-Plan verfügbar, kein Tracking, kein Datenmissbrauch.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">EU/CH</span></div>
+    </div>
+
+    <div class="card" data-cat="mail">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">E-Mail Provider</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Gmail</span><span class="replace-tag">Outlook</span></div>
+      <h3>Tutanota</h3>
+      <p class="desc">Verschlüsselter Mail-Dienst aus Deutschland. DSGVO-konform, Open Source, Kalender-Integration enthalten.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Deutschland</span></div>
+    </div>
+
+    <div class="card" data-cat="mail">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">Mail Server</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Exchange Server</span></div>
+      <h3>Mailcow</h3>
+      <p class="desc">Vollständiger Self-Hosted Mail-Server (SMTP, IMAP, Webmail) als Docker-Stack. Eigene Domain, volle Kontrolle.</p>
+      <div class="tags"><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- CLOUD STORAGE -->
+    <div class="card" data-cat="cloud">
+      <div class="card-header">
+        <span class="category-icon">☁️</span>
+        <span class="category-badge">Cloud Storage</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">OneDrive</span></div>
+      <h3>Seafile</h3>
+      <p class="desc">Schneller File-Sync & Share Server. Desktop/Mobile-Clients, Versionierung, Ende-zu-Ende-Verschlüsselung. Sehr performant.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="cloud">
+      <div class="card-header">
+        <span class="category-icon">☁️</span>
+        <span class="category-badge">Cloud Storage</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">Dropbox</span></div>
+      <h3>Proton Drive</h3>
+      <p class="desc">Verschlüsselter Cloud-Speicher von Proton. 1 GB gratis, Desktop & Mobile App, starker Datenschutz.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">EU/CH</span></div>
+    </div>
+
+    <!-- BROWSER -->
+    <div class="card" data-cat="browser">
+      <div class="card-header">
+        <span class="category-icon">🌐</span>
+        <span class="category-badge">Browser</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Chrome</span><span class="replace-tag">Edge</span></div>
+      <h3>Firefox</h3>
+      <p class="desc">Der klassische datenschutzfreundliche Browser von Mozilla. Erweiterbar, Open Source, kein Google-Tracking. uBlock Origin empfohlen.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="browser">
+      <div class="card-header">
+        <span class="category-icon">🌐</span>
+        <span class="category-badge">Browser</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Chrome</span><span class="replace-tag">Edge</span></div>
+      <h3>Brave</h3>
+      <p class="desc">Chromium-basiert mit eingebautem Ad-Blocker, Tracker-Schutz und privatem Browser-Modus via Tor. Sehr schnell.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="browser">
+      <div class="card-header">
+        <span class="category-icon">🌐</span>
+        <span class="category-badge">Browser</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Chrome</span></div>
+      <h3>LibreWolf</h3>
+      <p class="desc">Gehärteter Firefox-Fork mit maximaler Privatsphäre ab Werk. Keine Telemetrie, strenge Standardeinstellungen, ideal für Privacy-Enthusiasten.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="card" data-cat="search">
+      <div class="card-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-badge">Suchmaschine</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Search</span><span class="replace-tag">Bing</span></div>
+      <h3>DuckDuckGo</h3>
+      <p class="desc">Keine Profilbildung, kein Tracking. Gute Suchergebnisse (nutzt Bing-Index), „Bang"-Shortcuts für schnelle Suchen auf anderen Seiten.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="search">
+      <div class="card-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-badge">Suchmaschine</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Search</span></div>
+      <h3>Startpage</h3>
+      <p class="desc">Zeigt Google-Ergebnisse anonym an – ohne Tracking. Niederländisches Unternehmen, DSGVO-konform, „Anonymous View" Funktion.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Niederlande</span></div>
+    </div>
+
+    <div class="card" data-cat="search">
+      <div class="card-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-badge">Suchmaschine</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Search</span></div>
+      <h3>SearXNG</h3>
+      <p class="desc">Meta-Suchmaschine die mehrere Engines kombiniert. Komplett self-hostbar via Docker, keine Logs, keine Tracker.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- MAPS -->
+    <div class="card" data-cat="maps">
+      <div class="card-header">
+        <span class="category-icon">🗺️</span>
+        <span class="category-badge">Navigation</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Maps</span><span class="replace-tag">Bing Maps</span></div>
+      <h3>OpenStreetMap + OsmAnd</h3>
+      <p class="desc">OSM ist die freie Weltkarte. OsmAnd (Android/iOS) nutzt OSM für Offline-Navigation, POIs und Routen. Kein Tracking.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="maps">
+      <div class="card-header">
+        <span class="category-icon">🗺️</span>
+        <span class="category-badge">Navigation</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Maps</span></div>
+      <h3>Organic Maps</h3>
+      <p class="desc">Schnelle, schlanke Offline-Karten-App auf OSM-Basis. Kein Tracking, keine Accounts, keine Werbung. Für Wandern, Radfahren, Auto.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="card" data-cat="video">
+      <div class="card-header">
+        <span class="category-icon">🎥</span>
+        <span class="category-badge">Video-Streaming</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">YouTube</span></div>
+      <h3>PeerTube</h3>
+      <p class="desc">Dezentrales Video-Hosting-Netzwerk. Jeder kann eine Instanz betreiben, Videos sind zwischen Instanzen auffindbar. Kein Google.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="video">
+      <div class="card-header">
+        <span class="category-icon">🎥</span>
+        <span class="category-badge">YouTube-Frontend</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">YouTube</span></div>
+      <h3>Invidious</h3>
+      <p class="desc">Datenschutzfreundliches YouTube-Frontend. Zeigt YouTube-Videos ohne Google-Tracking. Self-hostbar oder öffentliche Instanzen nutzbar.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- CHAT / MESSENGER -->
+    <div class="card" data-cat="chat">
+      <div class="card-header">
+        <span class="category-icon">💬</span>
+        <span class="category-badge">Messenger</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">WhatsApp</span><span class="replace-tag">Teams</span></div>
+      <h3>Signal</h3>
+      <p class="desc">End-to-End verschlüsselter Messenger. Kein Meta, kein Microsoft. Empfohlen von Sicherheitsexperten weltweit. Für Einzel- und Gruppenthreads.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="chat">
+      <div class="card-header">
+        <span class="category-icon">💬</span>
+        <span class="category-badge">Team-Chat</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Microsoft Teams</span><span class="replace-tag">Slack</span></div>
+      <h3>Matrix / Element</h3>
+      <p class="desc">Dezentrales, verschlüsseltes Kommunikationsprotokoll. Element ist der bekannteste Client. Self-hostbar mit eigenem Homeserver (Synapse/Conduit).</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="chat">
+      <div class="card-header">
+        <span class="category-icon">💬</span>
+        <span class="category-badge">Video-Calls</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Meet</span><span class="replace-tag">Teams</span><span class="replace-tag">Zoom</span></div>
+      <h3>Jitsi Meet</h3>
+      <p class="desc">Verschlüsselte Video-Konferenzen ohne Account. Einfach Link teilen, fertig. Selbst hostbar oder meet.jit.si nutzen.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- PASSWÖRTER -->
+    <div class="card" data-cat="password">
+      <div class="card-header">
+        <span class="category-icon">🔐</span>
+        <span class="category-badge">Passwort-Manager</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Passwords</span><span class="replace-tag">1Password</span></div>
+      <h3>Bitwarden / Vaultwarden</h3>
+      <p class="desc">Bitwarden ist der beste Open-Source Passwort-Manager. Vaultwarden ist eine leichtgewichtige Self-Hosted Implementierung – perfekt für deinen NAS.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="password">
+      <div class="card-header">
+        <span class="category-icon">🔐</span>
+        <span class="category-badge">Passwort-Manager</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">LastPass</span><span class="replace-tag">Keychain</span></div>
+      <h3>KeePassXC</h3>
+      <p class="desc">Lokaler Passwort-Manager ohne Cloud. Datei-basiert (.kdbx), kann über deinen NAS/SMB synchronisiert werden. Keine Abhängigkeiten.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- OS -->
+    <div class="card" data-cat="os">
+      <div class="card-header">
+        <span class="category-icon">💻</span>
+        <span class="category-badge">Desktop OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Windows</span></div>
+      <h3>Ubuntu / Linux Mint</h3>
+      <p class="desc">Einsteigerfreundliche Linux-Distributionen. Mint ist besonders Windows-ähnlich. Komplett kostenlos, kein Tracking, riesige Community.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+    </div>
+
+    <div class="card" data-cat="os">
+      <div class="card-header">
+        <span class="category-icon">💻</span>
+        <span class="category-badge">Desktop OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Windows</span><span class="replace-tag">ChromeOS</span></div>
+      <h3>Fedora / openSUSE</h3>
+      <p class="desc">Moderne, stabile Linux-Distributionen für Power-User. Fedora ist sehr aktuell, openSUSE bietet YaST als komfortable Verwaltungsoberfläche.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+    </div>
+
+    <!-- NOTIZEN -->
+    <div class="card" data-cat="notes">
+      <div class="card-header">
+        <span class="category-icon">📝</span>
+        <span class="category-badge">Notizen</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Keep</span><span class="replace-tag">OneNote</span></div>
+      <h3>Joplin</h3>
+      <p class="desc">Markdown-basierter Notiz-Manager mit Sync über eigenen Server, Nextcloud, WebDAV oder Dropbox. Desktop + Mobile, verschlüsselt.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="notes">
+      <div class="card-header">
+        <span class="category-icon">📝</span>
+        <span class="category-badge">Notizen / Wissen</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">OneNote</span><span class="replace-tag">Notion</span></div>
+      <h3>Obsidian</h3>
+      <p class="desc">Lokaler Markdown-Editor mit Verlinkungen zwischen Notizen (Second Brain). Dateien liegen lokal, Sync über eigenen NAS/SMB möglich.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="notes">
+      <div class="card-header">
+        <span class="category-icon">📝</span>
+        <span class="category-badge">Wiki / Doku</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Confluence</span><span class="replace-tag">Notion</span></div>
+      <h3>WikiJS</h3>
+      <p class="desc">Modernes Self-Hosted Wiki. Markdown-Support, Benutzerverwaltung, Git-Backup. Ideal für Heimdokumentation oder kleine Teams. Läuft in Docker.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- FOTOS -->
+    <div class="card" data-cat="photo">
+      <div class="card-header">
+        <span class="category-icon">📷</span>
+        <span class="category-badge">Foto-Verwaltung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Photos</span><span class="replace-tag">OneDrive</span></div>
+      <h3>Immich</h3>
+      <p class="desc">Modernes Self-Hosted Foto-Backup mit Google-Photos-ähnlicher App. KI-Gesichtserkennung, Karten-Ansicht, automatischer Handy-Backup. Sehr aktiv entwickelt.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <div class="card" data-cat="photo">
+      <div class="card-header">
+        <span class="category-icon">📷</span>
+        <span class="category-badge">Foto-Verwaltung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Photos</span><span class="replace-tag">Lightroom</span></div>
+      <h3>PhotoPrism</h3>
+      <p class="desc">KI-gestützte Foto-App für den eigenen Server. Automatische Verschlagwortung, Gesichtserkennung, interaktive Weltkarte. Docker-basiert.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- VPN -->
+    <div class="card" data-cat="vpn" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🛡️</span>
+        <span class="category-badge">VPN</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">NordVPN</span><span class="replace-tag">ExpressVPN</span></div>
+      <h3>ProtonVPN</h3>
+      <p class="desc">VPN-Dienst aus der Schweiz von Proton. Strikte No-Log-Policy, Open Source, kostenloser Plan verfügbar. Einer der vertrauenswürdigsten VPN-Anbieter weltweit.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Schweiz</span></div>
+    </div>
+
+    <div class="card" data-cat="vpn" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🛡️</span>
+        <span class="category-badge">VPN</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">NordVPN</span><span class="replace-tag">ExpressVPN</span></div>
+      <h3>Mullvad VPN</h3>
+      <p class="desc">Schwedischer VPN-Anbieter mit radikalem Datenschutz – kein Account, keine E-Mail, Zahlung anonym möglich. Prüfungen durch externe Auditoren bestätigt.</p>
+      <div class="tags"><span class="tag privacy">Privacy-First</span><span class="tag eu">Schweden</span></div>
+    </div>
+
+    <!-- EU MAIL ERGÄNZUNGEN -->
+    <div class="card" data-cat="mail" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">E-Mail Provider</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Gmail</span><span class="replace-tag">Outlook</span></div>
+      <h3>Posteo</h3>
+      <p class="desc">Deutsches E-Mail-Angebot für 1€/Monat. Ökostrom, anonym bezahlbar, DSGVO-konform, keine Werbung, kein Tracking. Sehr beliebt in Deutschland.</p>
+      <div class="tags"><span class="tag privacy">Privacy-First</span><span class="tag eu">Deutschland</span></div>
+    </div>
+
+    <div class="card" data-cat="mail" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">📧</span>
+        <span class="category-badge">E-Mail Provider</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Gmail</span><span class="replace-tag">Outlook</span></div>
+      <h3>mailbox.org</h3>
+      <p class="desc">Deutsches Business-Mail-Angebot mit Kalender, Kontakten, Cloud-Speicher und Office. DSGVO, verschlüsselt, grüner Strom. Ab 1€/Monat.</p>
+      <div class="tags"><span class="tag privacy">Privacy-First</span><span class="tag eu">Deutschland</span></div>
+    </div>
+
+    <!-- EU CLOUD ERGÄNZUNGEN -->
+    <div class="card" data-cat="cloud" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">☁️</span>
+        <span class="category-badge">Cloud Storage</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">OneDrive</span></div>
+      <h3>Tresorit</h3>
+      <p class="desc">Schweizer verschlüsselter Cloud-Speicher für Privat und Business. Ende-zu-Ende-Verschlüsselung, DSGVO-konform, Daten in EU-Rechenzentren.</p>
+      <div class="tags"><span class="tag privacy">Privacy-First</span><span class="tag eu">Schweiz</span></div>
+    </div>
+
+    <div class="card" data-cat="cloud" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">☁️</span>
+        <span class="category-badge">Cloud Storage</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">Dropbox</span></div>
+      <h3>pCloud</h3>
+      <p class="desc">Schweizer Cloud mit optionaler clientseitiger Verschlüsselung (pCloud Crypto). Einmalige Lifetime-Zahlung möglich. Daten wahlweise in EU gespeichert.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag eu">Schweiz</span></div>
+    </div>
+
+    <!-- EU SEARCH ERGÄNZUNGEN -->
+    <div class="card" data-cat="search" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-badge">Suchmaschine</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Search</span><span class="replace-tag">Bing</span></div>
+      <h3>Ecosia</h3>
+      <p class="desc">Deutsche Suchmaschine die Gewinne für Baumpflanzprojekte nutzt. Betrieben mit 100% Ökostrom, DSGVO-konform, kein Verkauf von Nutzerdaten.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Deutschland</span></div>
+    </div>
+
+    <div class="card" data-cat="search" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-badge">Suchmaschine</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Search</span></div>
+      <h3>Qwant</h3>
+      <p class="desc">Französische Suchmaschine mit eigenem Index. Kein Tracking, DSGVO-konform, EU-Hosting. Speziell für europäische Nutzer entwickelt.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Frankreich</span></div>
+    </div>
+
+    <!-- EU CHAT ERGÄNZUNGEN -->
+    <div class="card" data-cat="chat" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">💬</span>
+        <span class="category-badge">Messenger</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">WhatsApp</span><span class="replace-tag">Telegram</span></div>
+      <h3>Threema</h3>
+      <p class="desc">Schweizer verschlüsselter Messenger ohne Pflicht zur Telefonnummer. Einmalige Zahlung (ca. 5€), keine Werbung, Daten in der Schweiz. Sehr beliebt in DE/CH/AT.</p>
+      <div class="tags"><span class="tag privacy">Privacy-First</span><span class="tag eu">Schweiz</span></div>
+    </div>
+
+    <div class="card" data-cat="chat" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">💬</span>
+        <span class="category-badge">Video-Calls</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Zoom</span><span class="replace-tag">Google Meet</span></div>
+      <h3>Whereby</h3>
+      <p class="desc">Norwegischer Video-Konferenz-Dienst. Kein Download nötig, DSGVO-konform, Daten in der EU. Kostenloser Plan für bis zu 100 Teilnehmer.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Norwegen</span></div>
+    </div>
+
+    <!-- EU OFFICE ERGÄNZUNGEN -->
+    <div class="card" data-cat="office" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">📄</span>
+        <span class="category-badge">Office Suite</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Office 365</span><span class="replace-tag">Google Workspace</span></div>
+      <h3>Infomaniak kSuite</h3>
+      <p class="desc">Schweizer All-in-One-Suite: Mail, Kalender, Drive, Office, Video-Meetings. DSGVO-konform, Ökostrom, Rechenzentren ausschliesslich in der Schweiz. Kostenloser Plan verfügbar.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">Schweiz</span></div>
+    </div>
+
+    <!-- EU PHOTO ERGÄNZUNGEN -->
+    <div class="card" data-cat="photo" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">📷</span>
+        <span class="category-badge">Foto-Cloud</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Photos</span><span class="replace-tag">iCloud</span></div>
+      <h3>Ente Photos</h3>
+      <p class="desc">Ende-zu-Ende verschlüsselter Foto-Backup-Dienst. Open Source, Daten in EU-Rechenzentren (Frankreich/Niederlande). Apps für alle Plattformen, auch self-hostbar.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span><span class="tag eu">EU</span></div>
+    </div>
+
+    <!-- EU NOTES ERGÄNZUNGEN -->
+    <div class="card" data-cat="notes" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">📝</span>
+        <span class="category-badge">Notizen</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Evernote</span><span class="replace-tag">Notion</span></div>
+      <h3>Notion-Alternative: AppFlowy</h3>
+      <p class="desc">Open-Source Notion-Klon mit lokalem Datenspeicher. Kein US-Cloud-Zwang, self-hostbar, aktiv entwickelt. Datenbank-Views, Kanban, Docs – alles dabei.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function filter(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = document.querySelectorAll('.card');
+    let visible = 0;
+    cards.forEach((card) => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('hidden', !show);
+      if (show) {
+        card.style.animationDelay = (visible * 0.04) + 's';
+        visible++;
+      }
+    });
+    document.getElementById('count').textContent = visible + ' Alternativen';
+  }
+
+  function filterEU() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = document.querySelectorAll('.card');
+    let visible = 0;
+    cards.forEach((card) => {
+      const show = card.dataset.eu === 'true';
+      card.classList.toggle('hidden', !show);
+      if (show) {
+        card.style.animationDelay = (visible * 0.04) + 's';
+        visible++;
+      }
+    });
+    document.getElementById('count').textContent = visible + ' Europäische Alternativen';
+  }
+
+  // Init count
+  document.getElementById('count').textContent = document.querySelectorAll('.card').length + ' Alternativen';
+</script>
+</body>
+</html>
