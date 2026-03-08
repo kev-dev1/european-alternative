@@ -79,15 +79,19 @@ Diese Übersicht entstand im Kontext eines **Debian Home-NAS/Servers**. Folgende
 - **[Vaultwarden](https://github.com/dani-garcia/vaultwarden)** – Passwort-Manager (Docker)
 - **[Immich](https://immich.app)** – Google Photos Ersatz (Docker)
 - **[Seafile](https://www.seafile.com)** – File-Sync (Docker)
-- **[SearXNG](https://docs.searxng.org)** – Suchmaschine (Docker)
 - **[Baikal](https://sabre.io/baikal/)** – CalDAV/CardDAV (Docker)
-- **[Ente Photos](https://github.com/ente-io/ente)** – Foto-Backup (Docker)
+- **[Jellyfin](https://jellyfin.org/)** – Mediatheke für's eigene Heim (Docker oder Repo)
 
 ---
 
 ## 📄 Lizenz
 
 MIT License – frei verwendbar, veränderbar und weitergegeben werden.
+
+## Weitere Empfohlene Liste:
+
+- **[Awesome-privacy](https://github.com/Lissy93/awesome-privacy)** - Ist auf Englisch, aber gute Referencen mit dabei
+- **[Awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted)** - für Self-Hoster, wenn alles im Haus bleiben soll
 
 ---
 
