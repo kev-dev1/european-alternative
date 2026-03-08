@@ -2,7 +2,7 @@
 
 > Eine kuratierte, interaktive Übersicht datenschutzfreundlicher Alternativen zu Google- und Microsoft-Diensten – mit besonderem Fokus auf **europäische Anbieter**.
 
-[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Ansehen-GitHub_Pages-5b6af5?style=for-the-badge)](https://github.com/kev-dev1/european-alternative)
+[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Ansehen-GitHub_Pages-5b6af5?style=for-the-badge)](https://kev-dev1.github.io/european-alternative/)
 [![Europäische Dienste](https://img.shields.io/badge/🇪🇺_Europäische_Dienste-enthalten-2563eb?style=for-the-badge)](#)
 [![Lizenz](https://img.shields.io/badge/Lizenz-MIT-3dd68c?style=for-the-badge)](#lizenz)
 
