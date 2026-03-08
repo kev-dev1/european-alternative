@@ -28,9 +28,11 @@ Die Übersicht ist filterbar nach Kategorie und zeigt ausschließlich europäisc
 | 💬 **Chat & Calls** | Signal, Matrix/Element, Jitsi, Threema, Whereby |
 | 🔐 **Passwörter** | Vaultwarden, KeePassXC |
 | 💻 **Betriebssystem** | Ubuntu, Linux Mint, Fedora, openSUSE |
+| 📱 **Mobile** | LineageOS, GraphenOS, /e/os |
 | 📝 **Notizen** | Joplin, Obsidian, WikiJS, AppFlowy |
 | 📷 **Fotos** | Immich, PhotoPrism, Ente Photos |
 | 🛡️ **VPN** | ProtonVPN, Mullvad |
+| 🏠 **Smart Home** | Home Assistant, OpenHAB |
 
 ---
 

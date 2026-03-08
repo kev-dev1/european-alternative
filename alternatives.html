@@ -14,10 +14,10 @@
 <meta property="og:title" content="🛡️ Google & Microsoft Alternativen">
 <meta property="og:description" content="Datenschutzfreundliche Alternativen für jeden Dienst – filterbar, europäisch, open source.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://DEINNAME.github.io/privacy-alternatives">
+<meta property="og:url" content="https://kev-dev1.github.io/european-alternative">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://DEINNAME.github.io/privacy-alternatives">
+<link rel="canonical" href="https://kev-dev1.github.io/european-alternative">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -181,6 +181,7 @@
   .card[data-cat="os"]::before { background: linear-gradient(90deg, #10b981, #0891b2); }
   .card[data-cat="notes"]::before { background: linear-gradient(90deg, #f5a623, #e05a7a); }
   .card[data-cat="vpn"]::before { background: linear-gradient(90deg, #1d6fa4, #3dd68c); }
+  .card[data-cat="home"]::before { background: linear-gradient(90deg, #e05a7a, #06b6d4); }
 
   .eu-filter-btn {
     border-color: #3b82f6 !important;
@@ -268,7 +269,9 @@
   }
 
   .tag.free { background: rgba(61,214,140,0.12); color: #3dd68c; }
+  .tag.paid { background: rgba(68, 28, 0, 1); color: #ffe100;}
   .tag.open { background: rgba(91,106,245,0.15); color: #818cf8; }
+  .tag.close { background: rgba(91,106,245,0.15); color: #f91d00; }
   .tag.self { background: rgba(245,166,35,0.13); color: #f5a623; }
   .tag.hosted { background: rgba(6,182,212,0.13); color: #22d3ee; }
   .tag.privacy { background: rgba(167,139,250,0.13); color: #a78bfa; }
@@ -341,9 +344,11 @@
     <button class="filter-btn" onclick="filter('chat')">💬 Chat</button>
     <button class="filter-btn" onclick="filter('password')">🔐 Passwörter</button>
     <button class="filter-btn" onclick="filter('os')">💻 OS</button>
+    <button class="filter-btn" onclick="filter('mobile')">📱 Mobile</button>
     <button class="filter-btn" onclick="filter('notes')">📝 Notizen</button>
     <button class="filter-btn" onclick="filter('photo')">📷 Fotos</button>
     <button class="filter-btn" onclick="filter('vpn')">🛡️ VPN</button>
+    <button class="filter-btn" onclick="filter('home')">🏠 Smart Home</button>
   </div>
 
   <div class="count" id="count"></div>
@@ -435,7 +440,7 @@
         <span class="category-icon">☁️</span>
         <span class="category-badge">Cloud Storage</span>
       </div>
-      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">OneDrive</span></div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">OneDrive</span><span class="replace-tag">iCloud</span></div>
       <h3>Seafile</h3>
       <p class="desc">Schneller File-Sync & Share Server. Desktop/Mobile-Clients, Versionierung, Ende-zu-Ende-Verschlüsselung. Sehr performant.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
@@ -446,7 +451,7 @@
         <span class="category-icon">☁️</span>
         <span class="category-badge">Cloud Storage</span>
       </div>
-      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">Dropbox</span></div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Drive</span><span class="replace-tag">Dropbox</span><span class="replace-tag">iCloud</span></div>
       <h3>Proton Drive</h3>
       <p class="desc">Verschlüsselter Cloud-Speicher von Proton. 1 GB gratis, Desktop & Mobile App, starker Datenschutz.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag privacy">Privacy-First</span><span class="tag eu">EU/CH</span></div>
@@ -566,6 +571,17 @@
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
     </div>
 
+    <div class="card" data-cat="video">
+      <div class="card-header">
+        <span class="category-icon">🎥</span>
+        <span class="category-badge">Media-Selfhost</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Youtube</span><span class="replace-tag">Google Play Movies</span><span class="replace-tag">Netflix</span><span class="replace-tag">Amazon Prime Video</span></div>
+      <h3>Jellyfin</h3>
+      <p class="desc">Die freie Software Media-Center. Jellyfin ist ein Programm, wo ihr eure eigene Mediathek kreieren könnt mit eure DVD's, CD's, Bilder und Musik.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
     <!-- CHAT / MESSENGER -->
     <div class="card" data-cat="chat">
       <div class="card-header">
@@ -644,6 +660,61 @@
       <h3>Fedora / openSUSE</h3>
       <p class="desc">Moderne, stabile Linux-Distributionen für Power-User. Fedora ist sehr aktuell, openSUSE bietet YaST als komfortable Verwaltungsoberfläche.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+
+      <div class="card" data-cat="os">
+      <div class="card-header">
+        <span class="category-icon">💻</span>
+        <span class="category-badge">Desktop OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Windows</span><span class="replace-tag">ChromeOS</span></div>
+      <h3>MacOS</h3>
+      <p class="desc">Das Desktop-Betriebssystem von Apple mit Fokus auf Datenschutz durch App-Berechtigungen, Sicherheitsfunktionen und lokale Datenverarbeitung.</p>
+      <div class="tags"><span class="tag paid">Bezahlen</span><span class="tag close">Proprietäre</span></div>
+    </div>
+
+    <!-- MOBILE -->
+    <div class="card" data-cat="os">
+      <div class="card-header">
+        <span class="category-icon">📱</span>
+        <span class="category-badge">Mobile OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Stock Android</span><span class="replace-tag">iOS</span></div>
+      <h3>LineageOS</h3>
+      <p class="desc">LineageOS ist eine Open-Source Android was von AOSP (Android Open Source Project) herauskam. Kann mit und ohne Google Apps laufen.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span></div>
+    </div>
+
+    <div class="card" data-cat="mobile">
+      <div class="card-header">
+        <span class="category-icon">📱</span>
+        <span class="category-badge">Mobile OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Stock Android</span><span class="replace-tag">iOS</span></div>
+      <h3>GrapheneOS</h3>
+      <p class="desc">GrapheneOS ist eine gehärtete Android, was speziell für Privatsphäre gebaut wurde. Funktioniert aktuell nur für Google Pixel Geräte. Motorola bringt demnächst ein Handy raus mit GrapheneOS</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="mobile">
+      <div class="card-header">
+        <span class="category-icon">📱</span>
+        <span class="category-badge">Mobile OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Stock Android</span><span class="replace-tag">iOS</span></div>
+      <h3>/e/OS</h3>
+      <p class="desc">/e/OS ist ein entgoogeltes Android System, was wie LineageOS ist. Murena verkauft /e/os Smartphones </p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span></div>
+    </div>
+
+    <div class="card" data-cat="mobile">
+      <div class="card-header">
+        <span class="category-icon">📱</span>
+        <span class="category-badge">Mobile OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Stock Android</span></div>
+      <h3>iOS</h3>
+      <p class="desc">Das mobile Betriebssystem von Apple mit starkem Privacy-Fokus durch App-Kontrollen, Tracking-Schutz und transparente Berechtigungen.</p>
+      <div class="tags"><span class="tag paid">Bezahlen</span><span class="tag close">Proprietäre</span></div>
     </div>
 
     <!-- NOTIZEN -->
@@ -852,6 +923,29 @@
       <h3>Notion-Alternative: AppFlowy</h3>
       <p class="desc">Open-Source Notion-Klon mit lokalem Datenspeicher. Kein US-Cloud-Zwang, self-hostbar, aktiv entwickelt. Datenbank-Views, Kanban, Docs – alles dabei.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- Smart Home -->
+    <div class="card" data-cat="home">
+      <div class="card-header">
+        <span class="category-icon">🏠</span>
+        <span class="category-badge">Smart Home</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Home</span><span class="replace-tag">Apple Homekit</span><span class="replace-tag">Amazon Alexa</span></div>
+      <h3>Home Assistent(https://www.home-assistant.io/)</h3>
+      <p class="desc">Home Assistent bringt euer Smart Home Geräte, Lokal und ohne Server Anbindung vom Hersteller an einer Stelle. Wo ihr die Kontrolle habt über euer System</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="home">
+      <div class="card-header">
+        <span class="category-icon">🏠</span>
+        <span class="category-badge">Smart Home</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Home</span><span class="replace-tag">Apple Homekit</span><span class="replace-tag">Amazon Alexa</span></div>
+      <h3>OpenHAB(https://www.openhab.org/)</h3>
+      <p class="desc">Das Smart Home stärken: Eine hersteller- und technologieunabhängige Open-Source-Automatisierungssoftware für Ihr Zuhause</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span><span class="tag privacy">Privacy-First</span></div>
     </div>
 
   </div>
