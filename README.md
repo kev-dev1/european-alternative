@@ -1,4 +1,4 @@
-# 🛡️ Google & Microsoft Alternativen
+# 🛡️ Digital Souverän – Europäische & Open Source Alternativen zu Big Tech
 
 > Eine kuratierte, interaktive Übersicht datenschutzfreundlicher Alternativen zu Google- und Microsoft-Diensten – mit besonderem Fokus auf **europäische Anbieter**.
 
