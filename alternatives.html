@@ -176,9 +176,11 @@
   .card[data-cat="search"]::before { background: linear-gradient(90deg, #06b6d4, #6366f1); }
   .card[data-cat="maps"]::before { background: linear-gradient(90deg, #3dd68c, #84cc16); }
   .card[data-cat="video"]::before { background: linear-gradient(90deg, #e05a7a, #dc2626); }
+  .card[data-cat="music"]::before { background: linear-gradient(90deg, #13399f, #1286d8);}
   .card[data-cat="chat"]::before { background: linear-gradient(90deg, #a78bfa, #5b6af5); }
   .card[data-cat="password"]::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
   .card[data-cat="os"]::before { background: linear-gradient(90deg, #10b981, #0891b2); }
+  .card[data-cat="mobile"]::before { background: linear-gradient(90deg, #10b981, #0891b2);}
   .card[data-cat="notes"]::before { background: linear-gradient(90deg, #f5a623, #e05a7a); }
   .card[data-cat="vpn"]::before { background: linear-gradient(90deg, #1d6fa4, #3dd68c); }
   .card[data-cat="home"]::before { background: linear-gradient(90deg, #e05a7a, #06b6d4); }
@@ -318,12 +320,13 @@
 <div class="container">
   <header>
     <div class="eyebrow">// Open Source & Privacy-First</div>
-    <h1><span class="m">Digital</span>Souverän – Europäische & Open Source Alternativen zu Big Tech</h1>
+    <h1><span class="m">Digital</span> Souverän – Europäische & Open Source Alternativen zu Big Tech</h1>
     <p class="subtitle">Unabhängig, sicher, meist kostenlos – die besten Alternativen für jeden Dienst.</p>
   </header>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#3dd68c"></div> Kostenlos</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffe100"></div> Bezahlen</div>
     <div class="legend-item"><div class="legend-dot" style="background:#818cf8"></div> Open Source</div>
     <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div> Self-Hosted möglich</div>
     <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div> Cloud-Hosted</div>
@@ -341,6 +344,7 @@
     <button class="filter-btn" onclick="filter('search')">🔍 Suche</button>
     <button class="filter-btn" onclick="filter('maps')">🗺️ Maps</button>
     <button class="filter-btn" onclick="filter('video')">🎥 Video</button>
+    <button class="filter-btn" onclick="filter('music')">🎧 Musik</button>
     <button class="filter-btn" onclick="filter('chat')">💬 Chat</button>
     <button class="filter-btn" onclick="filter('password')">🔐 Passwörter</button>
     <button class="filter-btn" onclick="filter('os')">💻 OS</button>
@@ -548,6 +552,17 @@
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
     </div>
 
+    <div class="card">
+      <div class="card-header">
+        <span class="category-icon"></span>
+        <span class="category-badge">Navigation</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Maps</span><span class="replace-tag">Apple Maps</span></div>
+      <h3>HERE WeGo</h3>
+      <p class="desc">Here ist ein Online-Geodatendienst und ein Navigationsprogramm, das ursprünglich von Nokia für Nokia-Smartphones entwickelt wurde.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag eu">Niederlande</span></div>
+    </div>
+
     <!-- VIDEO -->
     <div class="card" data-cat="video">
       <div class="card-header">
@@ -580,6 +595,40 @@
       <h3>Jellyfin</h3>
       <p class="desc">Die freie Software Media-Center. Jellyfin ist ein Programm, wo ihr eure eigene Mediathek kreieren könnt mit eure DVD's, CD's, Bilder und Musik.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag self">Self-Hosted</span></div>
+    </div>
+
+    <!-- Music -->
+    <div class="card" data-cat="music">
+      <div class="card-header">
+        <span class="category-icon">🎧</span>
+        <span class="category-badge">Musik-Streaming</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Youtube Music</span><span class="replace-tag">Apple Music</span><span class="replace-tag">Amazon Music</span></div>
+      <h3>Spotify</h3>
+      <p class="desc">Spotify ist ein Musik-Streaming-Dienst, der es Nutzern ermöglicht, Millionen von Songs, Alben und Podcasts kostenlos zu hören oder ein Premium-Abonnement abzuschließen, um offline zu hören und Werbung zu vermeiden. Die Plattform bietet personalisierte Playlists und Empfehlungen basierend auf den Hörgewohnheiten der Nutzer.</p>
+      <div class="tags"><span class="tag paid">Bezahlen</span><span class="tag close">Proprietäre</span><span class="tag eu">Schweden</span></div>
+    </div>
+
+    <div class="card" data-cat="music">
+      <div class="card-header">
+        <span class="category-icon">🎧</span>
+        <span class="category-badge">Musik-Streaming</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Youtube Music</span><span class="replace-tag">Apple Music</span><span class="replace-tag">Amazon Music</span></div>
+      <h3>Navidrome</h3>
+      <p class="desc">Navidrome ist ein Open-Source Musik-Streaming Programm, wo man seine Eigene Musik auf seinen NAS/Server Streamen kann.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag free">Open-Source</span></div>
+    </div>
+
+    <div class="card" data-cat="music">
+      <dav class="card-header">
+        <span class="category-icon">🎧</span>
+        <span class="category-badge">Musik-Streaming</span>
+      </dav>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Youtube Music</span><span class="replace-tag">Apple Music</span><span class="replace-tag">Amazon Music</span></div>
+      <h3>Funkwhale</h3>
+      <p class="desc">Funkwhale ist eine Dezentrale Musik-Platform, wo man Musik Streamen und mit Freunden und Familie teilen</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span></div>
     </div>
 
     <!-- CHAT / MESSENGER -->
@@ -660,6 +709,17 @@
       <h3>Fedora / openSUSE</h3>
       <p class="desc">Moderne, stabile Linux-Distributionen für Power-User. Fedora ist sehr aktuell, openSUSE bietet YaST als komfortable Verwaltungsoberfläche.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span></div>
+    </div>
+
+    <div class="card" data-cat="os">
+      <div class="card-header">
+        <span class="category-icon">💻</span>
+        <span class="category-badge">Desktop OS</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Windows</span><span class="replace-tag">ChromeOS</span><span class="replace-tag">MacOS</span></div>
+      <h3>Tuxedo OS</h3>
+      <p class="desc">Tuxedo OS ist ein Linux-Distributon mit Ubuntu Unterbau, für die hauseigene Tuxedo Computers</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag eu">Deutschland</span></div>
     </div>
 
     <div class="card" data-cat="os">
