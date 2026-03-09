@@ -179,9 +179,11 @@
   .card[data-cat="music"]::before { background: linear-gradient(90deg, #13399f, #1286d8);}
   .card[data-cat="chat"]::before { background: linear-gradient(90deg, #a78bfa, #5b6af5); }
   .card[data-cat="password"]::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+  .card[data-cat="2fa"]::before { background: linear-gradient(90deg, #ffffff, #016a02); }
   .card[data-cat="os"]::before { background: linear-gradient(90deg, #10b981, #0891b2); }
   .card[data-cat="mobile"]::before { background: linear-gradient(90deg, #10b981, #0891b2);}
   .card[data-cat="notes"]::before { background: linear-gradient(90deg, #f5a623, #e05a7a); }
+  .card[data-cat="photo"]::before { background: linear-gradient(90deg, #85543e, #f70000); }
   .card[data-cat="vpn"]::before { background: linear-gradient(90deg, #1d6fa4, #3dd68c); }
   .card[data-cat="home"]::before { background: linear-gradient(90deg, #e05a7a, #06b6d4); }
 
@@ -347,6 +349,7 @@
     <button class="filter-btn" onclick="filter('music')">🎧 Musik</button>
     <button class="filter-btn" onclick="filter('chat')">💬 Chat</button>
     <button class="filter-btn" onclick="filter('password')">🔐 Passwörter</button>
+    <button class="filter-btn" onclick="filter('2fa')">🔑 2-Faktor Authentifizierung</button>
     <button class="filter-btn" onclick="filter('os')">💻 OS</button>
     <button class="filter-btn" onclick="filter('mobile')">📱 Mobile</button>
     <button class="filter-btn" onclick="filter('notes')">📝 Notizen</button>
@@ -785,6 +788,51 @@
       <h3>KeePassXC</h3>
       <p class="desc">Lokaler Passwort-Manager ohne Cloud. Datei-basiert (.kdbx), kann über deinen NAS/SMB synchronisiert werden. Keine Abhängigkeiten.</p>
       <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <!-- 2-Faktor Authentifizierung -->
+    <div class="card" data-cat="2fa">
+      <div class="card-header">
+        <span class="category-icon">🔑</span>
+        <span class="category-badge">2-Faktor Authentifizierung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Authenticator</span><span class="replace-tag">Microsoft Authenticator</span><span class="replace-tag">Authy</span></div>
+      <h3>Bitwarden Authenticator</h3>
+      <p class="desc">Bitwarden Authenticator ist eine Authenticator App der neben der Bitwarden App, für Authenticator ist</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span></div>
+    </div>
+
+    <div class="card" data-cat="2fa">
+      <div class="card-header">
+        <span class="category-icon">🔑</span>
+        <span class="category-badge">2-Faktor Authentifizierung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Authenticator</span><span class="replace-tag">Microsoft Authenticator</span><span class="replace-tag">Authy</span></div>
+      <h3>Aegis Authenticator</h3>
+      <p class="desc">Aegis Authenticator ist eine kostenlose, sichere und quelloffene App zur Verwaltung Ihrer 2-Stufen-Verifizierungstoken für Ihre Online-Dienste.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span><span class="tag privacy">Privacy-First</span></div>
+    </div>
+
+    <div class="card" data-cat="2fa" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🔑</span>
+        <span class="category-badge">2-Faktor Authentifizierung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Authenticator</span><span class="replace-tag">Microsoft Authenticator</span><span class="replace-tag">Authy</span></div>
+      <h3>Ente Auth</h3>
+      <p class="desc">Ente Auth ist eine kostenlose Open-Source-App, die TOTP-Token speichert und generiert. Sie kann auch offline auf einem einzelnen Gerät verwendet werden, ohne dass ein Konto erforderlich ist.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span><span class="tag eu">Niederlande</span></div>
+    </div>
+
+    <div class="card" data-cat="2fa" data-eu="true">
+      <div class="card-header">
+        <span class="category-icon">🔑</span>
+        <span class="category-badge">2-Faktor Authentifizierung</span>
+      </div>
+      <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Google Authenticator</span><span class="replace-tag">Microsoft Authenticator</span><span class="replace-tag">Authy</span></div>
+      <h3>Proton Authenticator </h3>
+      <p class="desc">Proton Authenticator ist kostenlos, Open Source und sowohl für iOS als auch für Android verfügbar. Um Proton Authenticator nutzen zu können, ist ein Proton-Konto erforderlich. Bestehende 2FA-Codes können aus anderen gängigen Apps wie Google Authenticator und LastPass importiert werden.</p>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span><span class="tag eu"></span>EU/CH</div>
     </div>
 
     <!-- OS -->
