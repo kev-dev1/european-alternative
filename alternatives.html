@@ -291,22 +291,53 @@
   .legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px;
     margin-bottom: 32px;
     animation: fadeUp 0.6s 0.15s ease both;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--muted);
   }
 
   .legend-dot {
     width: 10px; height: 10px;
     border-radius: 3px;
+  }
+
+  .tag-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 13px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tag-filter-btn:hover {
+    border-color: rgba(255,255,255,0.25);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  .tag-filter-btn.active {
+    background: var(--surface2);
+    border-color: rgba(255,255,255,0.3);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .tag-filter-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    align-self: center;
+    margin-right: 4px;
+    opacity: 0.6;
   }
 
   .count {
@@ -866,7 +897,7 @@
       <div class="replaces"><span class="replaces-label">Ersetzt:</span><span class="replace-tag">Windows</span><span class="replace-tag">ChromeOS</span><span class="replace-tag">MacOS</span></div>
       <h3>Tuxedo OS</h3>
       <p class="desc">Tuxedo OS ist ein Linux-Distributon mit Ubuntu Unterbau, für die hauseigene Tuxedo Computers</p>
-      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag eu">Deutschland</span></div>
+      <div class="tags"><span class="tag free">Kostenlos</span><span class="tag open">Open-Source</span><span class="tag eu">Deutschland</span></div>
     </div>
 
     <div class="card" data-cat="os">
@@ -1054,39 +1085,67 @@
 </div>
 
 <script>
-  function filter(cat) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+  // Aktiver Kategorie-Filter und Tag-Filter
+  let activeCat = 'all';
+  let activeTag = 'all';
 
+  function applyFilters() {
     const cards = document.querySelectorAll('.card');
     let visible = 0;
     cards.forEach((card) => {
-      const show = cat === 'all' || card.dataset.cat === cat;
+      // Kategorie-Check
+      let catMatch = false;
+      if (activeCat === 'all') {
+        catMatch = true;
+      } else if (activeCat === 'eu') {
+        catMatch = card.dataset.eu === 'true';
+      } else {
+        catMatch = card.dataset.cat === activeCat;
+      }
+
+      // Tag-Check: prüfe ob Card ein <span class="tag {activeTag}"> hat
+      let tagMatch = false;
+      if (activeTag === 'all') {
+        tagMatch = true;
+      } else {
+        tagMatch = card.querySelector(`.tag.${activeTag}`) !== null;
+      }
+
+      const show = catMatch && tagMatch;
       card.classList.toggle('hidden', !show);
       if (show) {
         card.style.animationDelay = (visible * 0.04) + 's';
         visible++;
       }
     });
-    document.getElementById('count').textContent = visible + ' Alternativen';
+
+    const tagLabel = activeTag !== 'all' ? ` · Tag-Filter aktiv` : '';
+    document.getElementById('count').textContent = visible + ' Alternativen' + tagLabel;
+  }
+
+  function filter(cat) {
+    activeCat = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    applyFilters();
   }
 
   function filterEU() {
+    activeCat = 'eu';
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     event.target.classList.add('active');
-
-    const cards = document.querySelectorAll('.card');
-    let visible = 0;
-    cards.forEach((card) => {
-      const show = card.dataset.eu === 'true';
-      card.classList.toggle('hidden', !show);
-      if (show) {
-        card.style.animationDelay = (visible * 0.04) + 's';
-        visible++;
-      }
-    });
-    document.getElementById('count').textContent = visible + ' Europäische Alternativen';
+    applyFilters();
   }
+
+  // Tag-Filter Buttons
+  document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTag = btn.dataset.tag;
+      document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
 
   // Init count
   document.getElementById('count').textContent = document.querySelectorAll('.card').length + ' Alternativen';
